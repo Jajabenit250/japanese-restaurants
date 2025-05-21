@@ -6,16 +6,16 @@ export const env = createEnv({
    * Server-side environment variables schema
    */
   server: {
-    DATABASE_URL: z.string().url(),
-    NODE_ENV: z.enum(["development", "test", "production"]),
+    DATABASE_URL: z.string().url().optional().default("postgresql://postgres:password@localhost:5433/japanese_restaurants"),
+    NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   },
 
   /**
    * Client-side environment variables schema
    */
   client: {
-    NEXT_PUBLIC_APP_URL: z.string().url(),
-    NEXT_PUBLIC_APP_VERSION: z.string().min(1),
+    NEXT_PUBLIC_APP_URL: z.string().url().optional().default("http://localhost:3001"),
+    NEXT_PUBLIC_APP_VERSION: z.string().min(1).default("1.0.0"),
   },
 
   /**
@@ -31,5 +31,5 @@ export const env = createEnv({
   /**
    * Skip validation in client-side rendering
    */
-  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
+  skipValidation: process.env.SKIP_ENV_VALIDATION === "true",
 });

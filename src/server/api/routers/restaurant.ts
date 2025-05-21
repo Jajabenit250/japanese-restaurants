@@ -2,6 +2,7 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, publicProcedureWithLogging } from "@/server/api/trpc";
 import { Category } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 /**
  * Restaurant router with all restaurant-related endpoints
@@ -11,11 +12,13 @@ export const restaurantRouter = createTRPCRouter({
   getRestaurants: publicProcedureWithLogging
     .input(
       z.object({
-        category: z.nativeEnum(Category).optional(),
-        city: z.string().optional(),
-        isFavorite: z.boolean().optional(),
+        category: z.nativeEnum(Category).optional().nullable(),
+        city: z.string().optional().nullable(),
+        isFavorite: z.boolean().optional().nullable(),
+        search: z.string().optional().nullable(),
         limit: z.number().min(1).max(100).default(10).optional(),
         page: z.number().min(1).default(1).optional(),
+        cursor: z.string().optional().nullable(),
       }).optional(),
     )
     .query(async ({ ctx, input }) => {
@@ -24,12 +27,23 @@ export const restaurantRouter = createTRPCRouter({
       const skip = (page - 1) * limit;
       
       // Build query filter
-      const where = {
+      let where: Prisma.RestaurantWhereInput = {
         isActive: true,
         ...(input?.category ? { category: input.category } : {}),
         ...(input?.city ? { city: input.city } : {}),
-        ...(input?.isFavorite !== undefined ? { isFavorite: input.isFavorite } : {}),
+        ...(input?.isFavorite !== undefined && input?.isFavorite !== null ? { isFavorite: input.isFavorite } : {}),
       };
+      
+      // Add search filter if provided
+      if (input?.search) {
+        where = {
+          ...where,
+          OR: [
+            { name: { contains: input.search, mode: 'insensitive' } },
+            { desc: { contains: input.search, mode: 'insensitive' } },
+          ],
+        };
+      }
       
       try {
         // Execute query in parallel for better performance
@@ -61,7 +75,7 @@ export const restaurantRouter = createTRPCRouter({
       }
     }),
     
-  // Get a single restaurant by ID
+  // The rest of your router methods remain the same...
   getById: publicProcedureWithLogging
     .input(z.object({ id: z.string().uuid() }))
     .query(async ({ ctx, input }) => {
@@ -88,7 +102,6 @@ export const restaurantRouter = createTRPCRouter({
       }
     }),
     
-  // Toggle favorite status
   toggleFavorite: publicProcedureWithLogging
     .input(z.object({
       id: z.string().uuid(),
@@ -125,7 +138,6 @@ export const restaurantRouter = createTRPCRouter({
       }
     }),
     
-  // Get all categories with counts
   getCategories: publicProcedureWithLogging.query(async ({ ctx }) => {
     try {
       const categoryData = await ctx.db.$queryRaw`
@@ -147,7 +159,6 @@ export const restaurantRouter = createTRPCRouter({
     }
   }),
   
-  // Get all cities with counts
   getCities: publicProcedureWithLogging.query(async ({ ctx }) => {
     try {
       const cityData = await ctx.db.$queryRaw`

@@ -60,17 +60,6 @@ export function Header() {
             >
               Restaurants
             </Link>
-            <Link
-              href="/categories"
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === "/categories" 
-                  ? "text-foreground" 
-                  : "text-muted-foreground"
-              )}
-            >
-              Categories
-            </Link>
           </nav>
         </div>
         
@@ -136,18 +125,6 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Restaurants
-            </Link>
-            <Link
-              href="/categories"
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === "/categories" 
-                  ? "text-foreground" 
-                  : "text-muted-foreground"
-              )}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Categories
             </Link>
             <Link
               href="/favorites"

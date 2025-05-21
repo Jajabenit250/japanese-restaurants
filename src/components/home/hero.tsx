@@ -10,6 +10,17 @@ import { Button } from "@/components/ui/button";
 export function Hero() {
   const router = useRouter();
   
+  const handleExploreClick = () => {
+    router.push('/restaurants');
+  };
+  
+  const handleFavoritesClick = () => {
+    router.push('/favorites');
+  };
+  
+  // Updated image URL that's known to work
+  const heroImageUrl = "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1887&auto=format&fit=crop";
+  
   return (
     <section className="relative bg-gradient-to-r from-primary-600 to-primary-500 text-white py-20 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
@@ -26,7 +37,7 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 size="lg"
-                onClick={() => router.push('/restaurants')}
+                onClick={handleExploreClick}
                 className="bg-white text-primary-600 hover:bg-white/90 w-full sm:w-auto"
               >
                 Explore Restaurants
@@ -36,8 +47,8 @@ export function Hero() {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => router.push('/favorites')}
-                className="border-white text-white hover:bg-white/10 w-full sm:w-auto"
+                onClick={handleFavoritesClick}
+                className="border-white text-primary-600 hover:bg-white/10 w-full sm:w-auto"
               >
                 View Favorites
               </Button>
@@ -46,12 +57,12 @@ export function Hero() {
             <div className="grid grid-cols-3 gap-4 pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-yellow-200">1000+</div>
-                <div className="text-sm text-white/80">Restaurants</div>
+                <div className="text-sm text-primary-600/80">Restaurants</div>
               </div>
               
               <div className="text-center">
                 <div className="text-3xl font-bold text-yellow-200">20+</div>
-                <div className="text-sm text-white/80">Categories</div>
+                <div className="text-sm text-primary-600/80">Categories</div>
               </div>
               
               <div className="text-center">
@@ -64,7 +75,7 @@ export function Hero() {
           <div className="relative hidden md:block">
             <div className="relative rounded-lg overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1887&auto=format&fit=crop"
+                src={heroImageUrl}
                 alt="Japanese cuisine"
                 className="w-full h-[400px] object-cover"
               />

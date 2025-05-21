@@ -57,22 +57,21 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
     });
   };
   
+  // Use working Unsplash image or fallback
+  const imageUrl = restaurant.images[0] || "https://images.unsplash.com/photo-1617196034183-421b4917c92d?q=80&w=1887&auto=format&fit=crop";
+  
   return (
     <Link href={`/restaurants/${restaurant.id}`} passHref>
-      <Card>
-        <CardHeader>
+      <Card className="restaurant-card">
+        <CardHeader className="restaurant-image-container p-0">
           <div className="relative h-48 w-full">
-            <Image
-              src={restaurant.images[0] || "/placeholder-restaurant.jpg"}
+            <img
+              src={imageUrl}
               alt={restaurant.name}
-              fill
-              className="object-cover rounded-t-lg transition-transform duration-300"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="restaurant-image rounded-t-lg object-cover w-full h-full"
             />
             
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
               className={`favorite-button ${isFavorite ? 'favorite-active' : ''}`}
               onClick={handleToggleFavorite}
               disabled={isLoading}
@@ -80,7 +79,7 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
               aria-pressed={isFavorite}
             >
               <Heart className="h-5 w-5" fill={isFavorite ? "currentColor" : "none"} />
-            </Button>
+            </button>
             
             {restaurant.featured && (
               <div className="restaurant-featured">
@@ -90,7 +89,7 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
           </div>
         </CardHeader>
         
-        <CardContent>
+        <CardContent className="restaurant-content">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
               {getCategoryText(restaurant.category)}
@@ -100,16 +99,16 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
             </span>
           </div>
           
-          <CardTitle className="mb-2 line-clamp-2">
+          <CardTitle className="restaurant-name">
             {restaurant.name}
           </CardTitle>
           
-          <CardDescription className="line-clamp-2 mb-4">
+          <CardDescription className="restaurant-desc">
             {restaurant.desc}
           </CardDescription>
         </CardContent>
         
-        <CardFooter className="flex justify-between">
+        <CardFooter className="restaurant-footer">
           <div className="flex items-center">
             <div className="flex items-center text-amber-500 mr-2">
               <svg

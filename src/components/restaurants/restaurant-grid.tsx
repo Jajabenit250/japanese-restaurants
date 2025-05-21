@@ -1,8 +1,8 @@
 "use client";
 
+import { Restaurant } from "@prisma/client";
 import { RestaurantCard } from "./restaurant-card";
 import { RestaurantCardSkeleton } from "./restaurant-card-skeleton";
-import { Restaurant } from "@prisma/client";
 
 interface RestaurantGridProps {
   restaurants: Restaurant[];

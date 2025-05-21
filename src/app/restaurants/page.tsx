@@ -19,5 +19,7 @@ interface RestaurantsPageProps {
  * Restaurants listing page
  */
 export default function RestaurantsPage({ searchParams }: RestaurantsPageProps) {
-  return <RestaurantsClient searchParams={searchParams} />;
+  // With Next.js app router, we should pass searchParams directly to the client
+  // The client component will access the params using useSearchParams() hook
+  return <RestaurantsClient />;
 }

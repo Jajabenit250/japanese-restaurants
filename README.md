@@ -93,7 +93,6 @@ japanese-restaurants/
 │   ├── api/              # API routes
 │   ├── restaurants/      # Restaurant pages
 │   ├── favorites/        # Favorites page
-│   ├── categories/       # Categories page
 │   └── ...               # Other pages
 ├── components/           # React components
 │   ├── home/             # Homepage components
