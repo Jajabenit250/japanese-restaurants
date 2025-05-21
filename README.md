@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Japanese Restaurants - Full Stack Application
+
+A modern, full-stack application for browsing and favoriting Japanese restaurants. Built with Next.js, tRPC, Prisma, PostgreSQL, and Shadcn UI.
+
+![JapaneseEats Screenshot](https://via.placeholder.com/1200x630)
+
+## Features
+
+- **Browse Restaurants**: View and filter restaurants by category, city, and favorites
+- **Detailed Restaurant Pages**: View comprehensive information about each restaurant
+- **Favorites System**: Mark and manage your favorite restaurants
+- **Responsive Design**: Optimized for all devices from mobile to desktop
+- **Type-Safe API**: End-to-end type safety with tRPC
+- **Modern UI**: Beautiful UI components from Shadcn UI
+- **Dark Mode**: Full support for light and dark themes
+- **Accessibility**: WCAG compliant with keyboard navigation and screen reader support
+
+## Tech Stack
+
+### Frontend
+- **Next.js 13+ (App Router)**: React framework with server components
+- **Tailwind CSS**: Utility-first CSS framework
+- **Shadcn UI**: High-quality UI components built with Radix UI and Tailwind
+- **React Query**: Data fetching and caching
+
+### Backend
+- **tRPC**: End-to-end typesafe APIs
+- **Prisma**: Type-safe database client
+- **PostgreSQL**: Relational database
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js (v16+)
+- PostgreSQL database
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/japanese-restaurants.git
+   cd japanese-restaurants
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   Then edit `.env` with your database connection string and other settings.
+
+4. Set up the database:
+   ```bash
+   # Generate Prisma client
+   npm run db:generate
+   # or
+   yarn db:generate
+   
+   # Push schema to database
+   npm run db:push
+   # or
+   yarn db:push
+   
+   # Seed the database with sample data
+   npm run db:seed
+   # or
+   yarn db:seed
+   ```
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```
+japanese-restaurants/
+├── app/                  # Next.js app router pages
+│   ├── _trpc/            # tRPC client setup
+│   ├── api/              # API routes
+│   ├── restaurants/      # Restaurant pages
+│   ├── favorites/        # Favorites page
+│   ├── categories/       # Categories page
+│   └── ...               # Other pages
+├── components/           # React components
+│   ├── home/             # Homepage components
+│   ├── layout/           # Layout components
+│   ├── restaurants/      # Restaurant components
+│   └── ui/               # UI components (Shadcn)
+├── lib/                  # Utility functions
+├── prisma/               # Prisma schema and migrations
+│   ├── schema.prisma     # Database schema
+│   └── seed.ts           # Seed script
+├── public/               # Static assets
+├── server/               # Server-side code
+│   ├── api/              # tRPC API
+│   │   ├── routers/      # API routes
+│   │   └── trpc.ts       # tRPC setup
+│   └── db.ts             # Database client
+├── styles/               # Global styles
+└── ...                   # Config files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `npm run dev`: Start the development server
+- `npm run build`: Build the application for production
+- `npm run start`: Start the production server
+- `npm run lint`: Run ESLint
+- `npm run db:generate`: Generate Prisma client
+- `npm run db:push`: Push Prisma schema to database
+- `npm run db:studio`: Open Prisma Studio
+- `npm run db:seed`: Seed the database with sample data
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+This application can be deployed to any platform that supports Next.js applications, such as Vercel, Netlify, or your own server.
 
-To learn more about Next.js, take a look at the following resources:
+### Deploy to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The easiest way to deploy is using Vercel:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push your code to a GitHub repository
+2. Import the project to Vercel
+3. Add your environment variables
+4. Deploy!
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgements
+
+- Restaurant data and images from Unsplash
+- UI components from Shadcn UI
+- Icons from Lucide Icons

@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  id           String    @id @default(uuid())
+  name         String
+  desc         String
+  city         String
+  category     Category
+  rating       Float
+  rating_count Int
+  price_range  String
+  images       String[]
+  isFavorite   Boolean   @default(false)
+  featured     Json?
+  isActive     Boolean   @default(true)
+  deletedAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Indices for better query performance
+  @@index([category])
+  @@index([city])
+  @@index([isFavorite])
+  @@index([rating])
+  @@index([isActive])
+  @@index([name])
+}
+
+enum Category {
+  SUSHI
+  UNAGI
+  TEMPURA
+  TONKATSU
+  YAKITORI
+  SUKIYAKI
+  SOBA
+  RAMEN
+  YAKISOBA
+  OKONOMIYAKI
+  DONBURI
+  ODEN
+  KAISEKI
+  HAMBAGU
+  TEPPANYAKI
+  CURRY
+  YAKINIKU
+  NABE
+  CAFE
+  IZAKAYA
+  OTHER
+}
