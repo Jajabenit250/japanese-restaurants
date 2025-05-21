@@ -2,7 +2,10 @@
 
 A modern, full-stack application for browsing and favoriting Japanese restaurants. Built with Next.js, tRPC, Prisma, PostgreSQL, and Shadcn UI.
 
-![JapaneseEats Screenshot](https://via.placeholder.com/1200x630)
+![image](https://github.com/user-attachments/assets/c972332a-6972-49e7-961c-c20af1ca400b)
+![image](https://github.com/user-attachments/assets/ae28330e-0bff-4fcd-ad83-adc588210cc8)
+![image](https://github.com/user-attachments/assets/98e26d52-f442-40c3-88dc-73690dab846e)
+
 
 ## Features
 
